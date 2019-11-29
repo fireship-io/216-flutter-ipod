@@ -35,18 +35,16 @@ class IPod extends StatefulWidget {
 }
 
 class _IPodState extends State<IPod> {
-  Offset prev = Offset(0, 0);
 
   var ctrl = PageController(viewportFraction: 0.75);
 
-  double page = 0.0;
+  double currentPage = 0.0;
 
   @override
   void initState() {
     ctrl.addListener(() {
       setState(() {
-        page = ctrl.page;
-        print(page);
+        currentPage = ctrl.page;
       });
     });
     super.initState();
@@ -64,10 +62,10 @@ class _IPodState extends State<IPod> {
             scrollDirection: Axis.horizontal,
             itemCount: 9, //Colors.accents.length,
             itemBuilder: (context, int currentIdx) {
-              return MusicCard(
+              return AlbumCard(
                   color: Colors.accents[currentIdx],
                   idx: currentIdx,
-                  page: page);
+                  currentPage: currentPage);
             },
           ),
         ),
@@ -168,15 +166,15 @@ class _IPodState extends State<IPod> {
   }
 }
 
-class MusicCard extends StatelessWidget {
+class AlbumCard extends StatelessWidget {
   final Color color;
   final int idx;
-  final double page;
-  MusicCard({this.color, this.idx, this.page});
+  final double currentPage;
+  AlbumCard({this.color, this.idx, this.currentPage});
 
   @override
   Widget build(BuildContext context) {
-    double relativePosition = idx - page;
+    double relativePosition = idx - currentPage;
 
     return Container(
       width: 250,
