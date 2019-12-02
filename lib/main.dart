@@ -157,7 +157,7 @@ class _IPodState extends State<IPod> {
     bool panDown = !panUp;
 
     /// Pan location on the wheel
-    bool onTop = d.localPosition.dy <= 150;
+    bool onTop = d.localPosition.dy <= 150; // 150 == radius of circle
     bool onLeftSide = d.localPosition.dx <= 150;
     bool onRightSide = !onLeftSide;
     bool onBottom = !onTop;
